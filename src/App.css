@@ -13,6 +13,11 @@
   }
 }
 
+.container -box{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
