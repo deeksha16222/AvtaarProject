@@ -1,30 +1,34 @@
 import React from "react";
-import Card from "react-bootstrap/Card";
-
+import { Spin } from 'antd';
+import { EditOutlined, HeartOutlined, DeleteOutlined } from "@ant-design/icons";
+import { Card } from "antd";
+const { Meta } = Card;
 export default function Cards(props) {
-  return (
-    <div className="container mt-3">
-      <div className="row d-flex p-2 justify-content-center align-items-center">
+  return(
+    <div>
+      <div className="container">
         {props.data.map((element, id) => {
           return (
-            <>
+            <div className="cart">
               <Card
-                style={{ width: "22rem", border: "none" }}
-                className="mx-2 mt-4 card_style"
+                style={{
+                  width: "300px",
+                }}
+                cover={
+                  <img
+                    src={`https://avatars.dicebear.com/v2/avataaars/${element?.username}.svg?options[mood][]=happy`}
+                    alt="j"
+                  />
+                }
+                actions={[
+                  <HeartOutlined key="like" />,
+                  <EditOutlined key="edit" />,
+                  <DeleteOutlined key="delete" />,
+                ]}
               >
-                <Card.Img
-                  variant="top"
-                  src="https://b.zmtcdn.com/data/pictures/9/18857339/8f53919f1175c08cf0f0371b73704f9b_o2_featured_v2.jpg?output-format=webp"
-                  style={{ height: "16rem" }}
-                  className="mt-3"
-                />
-                <Card.Body className="d-flex-column align-items-start">
-                  <Card.Title>{element.name}</Card.Title>
-                  <Card.Text>{element.email}</Card.Text>
-                  <Card.Text>{element.phone}</Card.Text>
-                </Card.Body>
+                <Meta title={element.name} description={element.phone} />
               </Card>
-            </>
+            </div>
           );
         })}
       </div>

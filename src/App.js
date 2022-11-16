@@ -1,19 +1,22 @@
-import React,{useState,useEffect} from 'react'
-import './App.css'
-import Cards from './Components/Cards';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import AvtarImage from './Components/AvtarImage';
+import React, { useState, useEffect } from "react";
+import "./App.css";
+import Cards from "./Components/Cards";
+import "antd/dist/antd.css";
 
 function App() {
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     fetch("https://jsonplaceholder.typicode.com/users")
       .then((response) => response.json())
-      .then((result) => {setData(result)});
+      .then((result) => {
+        setData(result);
+        setLoading(false);
+      });
   }, []);
   return (
     <div className="App">
-    <Cards data={data}/>
+      <Cards data={data} />
     </div>
   );
 }
