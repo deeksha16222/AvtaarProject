@@ -6,21 +6,17 @@ import "antd/dist/antd.css";
 
 function App() {
   const [data, setData] = useState([]);
-  const[loading,isLoading] = useState(false)
+  const [loading, isLoading] = useState(false);
   useEffect(() => {
     fetch("https://jsonplaceholder.typicode.com/users")
       .then((response) => response.json())
       .then((result) => {
         setData(result);
-        isLoading(true)
+        isLoading(true);
       });
   }, []);
   return (
-    <div className="App">
-    {loading ? (
-      <Cards data={data} />
-    ) : (<Loader/>) }
-    </div>
+    <div className="App">{loading ? <Cards data={data} /> : <Loader />}</div>
   );
 }
 

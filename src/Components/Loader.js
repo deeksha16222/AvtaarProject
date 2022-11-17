@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { LoadingOutlined } from "@ant-design/icons";
 import { Spin } from "antd";
 
@@ -6,8 +6,8 @@ export default function Loader() {
   const antIcon = (
     <LoadingOutlined
       style={{
-        fontSize: "80vh",
-        textAlign: "center"
+        fontSize: "60vh",
+        textAlign: "center",
       }}
       spin
     />

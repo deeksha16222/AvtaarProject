@@ -1,8 +1,15 @@
 import React, { useState } from "react";
-import { Modal, Spin } from "antd";
-import { EditOutlined, HeartOutlined, DeleteOutlined } from "@ant-design/icons";
+import { Form, Input } from "antd";
+import { Modal } from "antd";
+import {
+  EditOutlined,
+  HeartOutlined,
+  DeleteFilled,
+  PhoneOutlined,
+  MailOutlined,
+  GlobalOutlined,
+} from "@ant-design/icons";
 import { Card } from "antd";
-const { Meta } = Card;
 export default function Cards(props) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [liked, setLiked] = useState("");
@@ -21,6 +28,13 @@ export default function Cards(props) {
   function manage() {
     setLiked("red");
   }
+  const onFinish = (values) => {
+    console.log("Success:", values);
+  };
+  const onFinishFailed = (errorInfo) => {
+    console.log("Failed:", errorInfo);
+  };
+
   return (
     <div>
       <div className="container">
@@ -28,9 +42,6 @@ export default function Cards(props) {
           return (
             <div className="cart">
               <Card
-                style={{
-                  width: "300px",
-                }}
                 cover={
                   <img
                     src={`https://avatars.dicebear.com/v2/avataaars/${element?.username}.svg?options[mood][]=happy`}
@@ -44,10 +55,23 @@ export default function Cards(props) {
                     style={{ color: liked }}
                   />,
                   <EditOutlined key="edit" onClick={change} />,
-                  <DeleteOutlined key="delete" />,
+                  <DeleteFilled key="delete" />,
                 ]}
               >
-                <Meta title={element.name} description={element.phone} />
+                <div className="description">
+                  <p className="textxl">{element.name}</p>
+
+                  <p>
+                    <MailOutlined /> {element.email}
+                  </p>
+                  <p>
+                    <PhoneOutlined /> {element.phone}
+                  </p>
+                  <p>
+                    {" "}
+                    <GlobalOutlined /> http://{element.website}
+                  </p>
+                </div>
               </Card>
             </div>
           );
@@ -55,28 +79,76 @@ export default function Cards(props) {
       </div>
       <div className="box">
         <Modal
-          {...props}
           title="Basic Modal"
           open={isModalOpen}
           onOk={handleOk}
           onCancel={handleCancel}
         >
-          <div className="boxcontain">
-            {" "}
-            Name : <input type="text" />{" "}
-          </div>
-          <div className="boxcontain">
-            {" "}
-            Email : <input type="email" />{" "}
-          </div>
-          <div className="boxcontain">
-            {" "}
-            Phone : <input type="phone" />{" "}
-          </div>
-          <div className="boxcontain">
-            {" "}
-            Website : <input type="text" />{" "}
-          </div>
+          <Form
+            name="basic"
+            labelCol={{
+              span: 8,
+            }}
+            wrapperCol={{
+              span: 16,
+            }}
+            initialValues={{
+              remember: true,
+            }}
+            onFinish={onFinish}
+            onFinishFailed={onFinishFailed}
+            autoComplete="off"
+          >
+            <Form.Item
+              label="Name"
+              name="Username"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your username!",
+                },
+              ]}
+            >
+              <Input type="text" />
+            </Form.Item>
+
+            <Form.Item
+              label="Email"
+              name="email"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your email!",
+                },
+              ]}
+            >
+              <Input type="email" />
+            </Form.Item>
+            <Form.Item
+              label="Phone"
+              name="Phone"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input mobile number!",
+                },
+              ]}
+            >
+              <Input type="number" />
+            </Form.Item>
+            <Form.Item
+              label="Company"
+              name="Username"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your username!",
+                },
+              ]}
+            >
+              <Input type="text" />
+            </Form.Item>
+          </Form>
         </Modal>
       </div>
     </div>
