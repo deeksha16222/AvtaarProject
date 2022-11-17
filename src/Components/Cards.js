@@ -13,7 +13,7 @@ import { Card } from "antd";
 export default function Cards(props) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [liked, setLiked] = useState("");
-
+  const [defaults, setDefaults] = useState();
   const handleOk = () => {
     setIsModalOpen(false);
   };
@@ -21,8 +21,9 @@ export default function Cards(props) {
     setIsModalOpen(false);
   };
 
-  function change() {
+  function change(element) {
     setIsModalOpen(true);
+    setDefaults(element);
   }
 
   function manage() {
@@ -54,20 +55,25 @@ export default function Cards(props) {
                     onClick={manage}
                     style={{ color: liked }}
                   />,
-                  <EditOutlined key="edit" onClick={change} />,
+                  <EditOutlined
+                    key="edit"
+                    onClick={() => {
+                      change(element);
+                    }}
+                  />,
                   <DeleteFilled key="delete" />,
                 ]}
               >
                 <div className="description">
                   <p className="textxl">{element.name}</p>
 
-                  <p>
+                  <p style={{ margin: 0 }}>
                     <MailOutlined /> {element.email}
                   </p>
-                  <p>
+                  <p style={{ margin: 0 }}>
                     <PhoneOutlined /> {element.phone}
                   </p>
-                  <p>
+                  <p style={{ margin: 0 }}>
                     {" "}
                     <GlobalOutlined /> http://{element.website}
                   </p>
@@ -138,7 +144,7 @@ export default function Cards(props) {
             </Form.Item>
             <Form.Item
               label="Company"
-              name="Username"
+              name="website"
               rules={[
                 {
                   required: true,
