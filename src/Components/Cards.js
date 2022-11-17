@@ -2,13 +2,24 @@ import React, { useState } from "react";
 import { Modal, Spin } from "antd";
 import { EditOutlined, HeartOutlined, DeleteOutlined } from "@ant-design/icons";
 import { Card } from "antd";
-import Modals from "./Modals";
 const { Meta } = Card;
 export default function Cards(props) {
-  const [opens, setOpens] = useState(false);
-  function change(){
-    setOpens(true)
-    Modals(opens)
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [liked, setLiked] = useState("");
+
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+
+  function change() {
+    setIsModalOpen(true);
+  }
+
+  function manage() {
+    setLiked("red");
   }
   return (
     <div>
@@ -27,7 +38,11 @@ export default function Cards(props) {
                   />
                 }
                 actions={[
-                  <HeartOutlined key="like" />,
+                  <HeartOutlined
+                    key="like"
+                    onClick={manage}
+                    style={{ color: liked }}
+                  />,
                   <EditOutlined key="edit" onClick={change} />,
                   <DeleteOutlined key="delete" />,
                 ]}
@@ -37,6 +52,32 @@ export default function Cards(props) {
             </div>
           );
         })}
+      </div>
+      <div className="box">
+        <Modal
+          {...props}
+          title="Basic Modal"
+          open={isModalOpen}
+          onOk={handleOk}
+          onCancel={handleCancel}
+        >
+          <div className="boxcontain">
+            {" "}
+            Name : <input type="text" />{" "}
+          </div>
+          <div className="boxcontain">
+            {" "}
+            Email : <input type="email" />{" "}
+          </div>
+          <div className="boxcontain">
+            {" "}
+            Phone : <input type="phone" />{" "}
+          </div>
+          <div className="boxcontain">
+            {" "}
+            Website : <input type="text" />{" "}
+          </div>
+        </Modal>
       </div>
     </div>
   );
