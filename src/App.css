@@ -51,12 +51,11 @@
 
 .container {
   display: grid;
-
   grid-template-columns: repeat(4, 1fr);
-  margin-left: 20px;
 }
 .cart {
   padding-top: 20px;
+  padding-left: 20px;
 }
 .ant-card-cover img {
   background-color: #eff4fa;
