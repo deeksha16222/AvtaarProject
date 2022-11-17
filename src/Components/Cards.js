@@ -6,6 +6,10 @@ import Modals from "./Modals";
 const { Meta } = Card;
 export default function Cards(props) {
   const [opens, setOpens] = useState(false);
+  function change(){
+    setOpens(true)
+    Modals(opens)
+  }
   return (
     <div>
       <div className="container">
@@ -19,12 +23,12 @@ export default function Cards(props) {
                 cover={
                   <img
                     src={`https://avatars.dicebear.com/v2/avataaars/${element?.username}.svg?options[mood][]=happy`}
-                    alt="j"
+                    alt="icon"
                   />
                 }
                 actions={[
                   <HeartOutlined key="like" />,
-                  <EditOutlined key="edit" onClick={() => setOpens(true)} />,
+                  <EditOutlined key="edit" onClick={change} />,
                   <DeleteOutlined key="delete" />,
                 ]}
               >
