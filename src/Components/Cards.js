@@ -77,7 +77,7 @@ export default function Cards(props) {
                       change();
                     }}
                   />,
-                  <DeleteFilled key="delete" />,
+                  <DeleteFilled key="delete" onClick={()=>props.deleteUser(element.id)}/>,
                 ]}
               >
                 <div className="description">

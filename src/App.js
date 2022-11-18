@@ -15,8 +15,13 @@ function App() {
         isLoading(true);
       });
   }, []);
+
+  const deleteUser = (id) => {
+    setData(data.filter((user) => user.id !== id));
+  };
+
   return (
-    <div className="App">{loading ? <Cards data={data} /> : <Loader />}</div>
+    <div className="App">{loading ? <Cards data={data} deleteUser={deleteUser} /> : <Loader />}</div>
   );
 }
 
