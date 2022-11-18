@@ -43,6 +43,7 @@ export default function Cards(props) {
   function manage() {
     setLiked("red");
   }
+
   const onFinish = (values) => {
     console.log("Success:", values);
   };
