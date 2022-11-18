@@ -6,8 +6,8 @@ export default function Loader() {
   const antIcon = (
     <LoadingOutlined
       style={{
-        fontSize: "60vh",
-        textAlign: "center",
+        fontSize: "40vh",
+        alignContent: "center"
       }}
       spin
     />

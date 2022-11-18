@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Form, Input } from "antd";
+import FormItem from "antd/es/form/FormItem";
+
 import { Modal } from "antd";
 import {
   EditOutlined,
@@ -11,19 +13,32 @@ import {
 } from "@ant-design/icons";
 import { Card } from "antd";
 export default function Cards(props) {
+  const [defaults, setDefaults] = useState("");
+  //defining antd form
+  const [form] = Form.useForm();
+
+  React.useEffect(() => {
+    form.setFieldsValue({
+      Username: defaults?.name,
+      email: defaults?.email,
+      Phone: defaults?.phone,
+      website: defaults?.website,
+    });
+  }, [form, defaults]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [liked, setLiked] = useState("");
-  const [defaults, setDefaults] = useState();
+
   const handleOk = () => {
+    setDefaults("");
     setIsModalOpen(false);
   };
   const handleCancel = () => {
+    setDefaults("");
     setIsModalOpen(false);
   };
 
-  function change(element) {
+  function change() {
     setIsModalOpen(true);
-    setDefaults(element);
   }
 
   function manage() {
@@ -35,6 +50,7 @@ export default function Cards(props) {
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
+  console.log(defaults?.username, defaults);
 
   return (
     <div>
@@ -58,7 +74,8 @@ export default function Cards(props) {
                   <EditOutlined
                     key="edit"
                     onClick={() => {
-                      change(element);
+                      setDefaults(element);
+                      change();
                     }}
                   />,
                   <DeleteFilled key="delete" />,
@@ -98,14 +115,12 @@ export default function Cards(props) {
             wrapperCol={{
               span: 16,
             }}
-            initialValues={{
-              remember: true,
-            }}
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
             autoComplete="off"
+            form={form}
           >
-            <Form.Item
+            <FormItem
               label="Name"
               name="Username"
               rules={[
@@ -116,9 +131,9 @@ export default function Cards(props) {
               ]}
             >
               <Input type="text" />
-            </Form.Item>
+            </FormItem>
 
-            <Form.Item
+            <FormItem
               label="Email"
               name="email"
               rules={[
@@ -129,8 +144,8 @@ export default function Cards(props) {
               ]}
             >
               <Input type="email" />
-            </Form.Item>
-            <Form.Item
+            </FormItem>
+            <FormItem
               label="Phone"
               name="Phone"
               rules={[
@@ -140,9 +155,9 @@ export default function Cards(props) {
                 },
               ]}
             >
-              <Input type="number" />
-            </Form.Item>
-            <Form.Item
+              <Input type="text" />
+            </FormItem>
+            <FormItem
               label="Company"
               name="website"
               rules={[
@@ -153,7 +168,7 @@ export default function Cards(props) {
               ]}
             >
               <Input type="text" />
-            </Form.Item>
+            </FormItem>
           </Form>
         </Modal>
       </div>
