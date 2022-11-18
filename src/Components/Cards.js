@@ -14,7 +14,6 @@ import {
 import { Card } from "antd";
 export default function Cards(props) {
   const [defaults, setDefaults] = useState("");
-  //defining antd form
   const [form] = Form.useForm();
 
   React.useEffect(() => {

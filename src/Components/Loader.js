@@ -6,9 +6,10 @@ export default function Loader() {
   const antIcon = (
     <LoadingOutlined
     style={{
-      fontSize: "40vh",
-      alignContent: "center"
+      fontSize: "30vh",
+      margin:"10px auto"
     }}
+    className="load"
       spin
     />
   );
