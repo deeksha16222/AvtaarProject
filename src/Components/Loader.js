@@ -5,10 +5,10 @@ import { Spin } from "antd";
 export default function Loader() {
   const antIcon = (
     <LoadingOutlined
-      style={{
-        fontSize: "40vh",
-        alignContent: "center"
-      }}
+    style={{
+      fontSize: "40vh",
+      alignContent: "center"
+    }}
       spin
     />
   );

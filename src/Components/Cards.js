@@ -50,7 +50,6 @@ export default function Cards(props) {
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
-  console.log(defaults?.username, defaults);
 
   return (
     <div>
